@@ -15,11 +15,11 @@ function cargarEventos() {
         carro.eliminarProducto(e)
     }
     
-    vaciarCarritoBtn.onclick = (e) =>{
+    $('#vaciar-todo').click((e)=>{
         carro.vaciarCarrito(e)
-    }
+    })
     
-    document.onload = carro.leerLocalStorage()
+    $(document).ready(carro.leerLocalStorage())
     
     procesarPedidoBtn.onclick = (e) =>{
         carro.procesarPedido(e)

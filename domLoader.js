@@ -1,4 +1,3 @@
-const gondola = document.getElementById("productos")
 
 //------CREAR LOS PRODUCTOS------- 
 class Producto{
@@ -28,23 +27,21 @@ const enJSON = JSON.stringify(productos)
 
 
 //----INSERTAR LOS PRODUCTOS EN EL HTML-----
-for (const producto of productos) {
-  let container = document.createElement('div')
-  container.setAttribute("class", "col-md-3");
-  container.innerHTML = `
-    <div class="item shadow mb-4">
-        <h3 class="item-title">${producto.nombre}</h3>
-        <img class="item-image" src="${producto.imagen}">
-        <div class="item-details">
-          <span>USD <h4 class="precio">${producto.precio}</h4></span>
-          <a href="#" class="item-button btn btn-primary agregar-carrito " itemid="${producto.id}">AÑADIR AL CARRITO</a>
-          
-        </div>
-  </div>
-  `
-  gondola.appendChild(container)
-}
 
+for (const producto of productos) {
+  $('#productos').append(`
+  <div class="col-md-3">
+    <div class="item shadow mb-4">
+    <h3 class="item-title">${producto.nombre}</h3>
+    <img class="item-image" src="${producto.imagen}">
+    <div class="item-details">
+      <span>USD <h4 class="precio">${producto.precio}</h4></span>
+      <a href="#" class="item-button btn btn-primary agregar-carrito " itemid="${producto.id}">AÑADIR AL CARRITO</a>
+      
+    </div>
+    </div>
+    </div>`)
+}
 
 
 
