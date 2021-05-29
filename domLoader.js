@@ -1,4 +1,3 @@
-
 //------CREAR LOS PRODUCTOS------- 
 class Producto{
   constructor(id,nombre,precio,imagen) {
@@ -6,7 +5,6 @@ class Producto{
     this.nombre = nombre.toLowerCase()
     this.precio = parseFloat(precio)
     this.imagen = imagen.toLowerCase()
-    this.hablar = () => console.log("Hola soy "+ this.nombre)
   }
 
 }
@@ -23,9 +21,6 @@ const zanahoria = new Producto(9,"zanahoria",5,"img/zanahoria.svg")
 
 productos.push(cebolla,frutillas,lechuga,limon,papas,banana,sandia,zanahoria)
 
-const enJSON = JSON.stringify(productos)
-
-
 //----INSERTAR LOS PRODUCTOS EN EL HTML-----
 
 for (const producto of productos) {
@@ -40,7 +35,8 @@ for (const producto of productos) {
       
     </div>
     </div>
-    </div>`)
+    </div>`
+  )
 }
 
 

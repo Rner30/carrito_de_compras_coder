@@ -31,19 +31,18 @@ class carritoDeCompras{
         }
         
     }
+
     //--PONER PRODUCTO EN EL CARRITO
     insertarCarrito(infoProducto){
-        const div = document.createElement('tr')
-        
-        div.innerHTML = `
-                   
-            <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
-            <td>${infoProducto.precio}</td>
-            <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td>
-        `
-        carrito.appendChild(div)
-        
+        $('#carrito').append(`
+            <tr>
+                <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
+                <td>${infoProducto.precio}</td>
+                <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td> 
+            </tr>
+        `)
         this.guardarProductosLocalStorage(infoProducto)
+        
     }
     
     //--ELIMINAR PRODUCTO DEL CARRITO (INDEX)
@@ -57,8 +56,7 @@ class carritoDeCompras{
 
         }
         this.eliminarProductoLocalStorage(productoID)
-        this.calcularTotal()
-        
+        this.calcularTotal()     
     } 
     
     vaciarCarrito = (e) =>{
@@ -66,11 +64,11 @@ class carritoDeCompras{
         while (carrito.firstChild) {
             carrito.removeChild(carrito.firstChild)
         }
-        this.vaciarLocalStorage()
-        
+        this.vaciarLocalStorage()  
     }
     
     //--GUARDAR PRODUCTO AGREGADO AL CARRITO
+
     guardarProductosLocalStorage(producto){
         let productos;
         productos = this.obtenerProductosLocalStorage()
@@ -88,7 +86,6 @@ class carritoDeCompras{
 
         }
         return productosLS
-
     }
     //--QUITAR PRODUCTO MEDIANTE ID --
     eliminarProductoLocalStorage(productoID){
@@ -99,8 +96,7 @@ class carritoDeCompras{
                 productosLS.splice(index, 1)
             }   
         })
-        localStorage.setItem("productos",JSON.stringify(productosLS))
-        
+        localStorage.setItem("productos",JSON.stringify(productosLS))  
     }
     
     //--PRINTEAR ELEMENTOS QUE ESTAN EN EL LOCALSTORAGE--
@@ -108,16 +104,14 @@ class carritoDeCompras{
         let productosLS
         productosLS = this.obtenerProductosLocalStorage()
         productosLS.forEach(infoProducto =>{
-            const div = document.createElement('tr')
-        
-            div.innerHTML = `        
-            <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
-            <td>${infoProducto.precio}</td>
-            <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td>
-            `
-            carrito.appendChild(div)
+            $('#carrito').append(`
+                <tr>
+                    <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
+                    <td>${infoProducto.precio}</td>
+                    <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td> 
+                </tr>
+            `)
         });
-        
     }
     
     vaciarLocalStorage(){
@@ -130,9 +124,68 @@ class carritoDeCompras{
             alert("No hay productos en el carrito")
         }else{
             location.href = "compra.html"
-        }
-        
+        }   
+    }
+    //--AGREGAR PRODUCTOS A COMPRA.HTML POR LOCALSTORAGE
+    leerLocalStorageCompra(){
+        let productosLS 
+        productosLS = this.obtenerProductosLocalStorage()
+        productosLS.forEach(function(producto){
+            let precioSinSigno = (Number(producto.precio.replace("$" , "")) )
+            $('#lista-procesada').append(`
+                <tr>
+                    <td>
+                        <img src="${producto.imagen}" width = 100>
+                    </td>
+                    <td>${producto.titulo}</td>
+                    <td>${precioSinSigno}</td>
+                    <td>
+                        <input type="number" class="form-control cantidad" min="1" value="${producto.cantidad}">
+                    </td>
+                    <td id="subtotales">${precioSinSigno * producto.cantidad} </td>
+                    <td>
+                        <a href="#" class="borrar-producto btn btn-danger" itemid="${producto.id}">X</a> 
+                    </td> 
+                </tr>
+            `)
+        })   
     }
     
+    calcularTotal(){
+        let productoLS
+        let total = 0 , subtotal = 0 , impuestos = 0
+        
+        productoLS = this.obtenerProductosLocalStorage()
+        for (let i = 0; i < productoLS.length; i++) {   
+            let element = Number(productoLS[i].precio * productoLS[i].cantidad);
+            total = total + element
+        }
+        impuestos = parseFloat(total * 0.21).toFixed(2)
+        subtotal = parseFloat(total - impuestos).toFixed(2)
+        
+        $('#subtotal').html(subtotal)
+        $('#imp').html(impuestos)
+        $('#total').html(total.toFixed(2))         
+    }
+    //AUMENTAR CANTIDAD DE LOS PRODUCTOS SELECCIONADOS
+    obtenerEvento(e) {
+        e.preventDefault();
+        let id, cantidad, producto, productosLS
+        
+        if (e.target.classList.contains('cantidad')) {
+            producto = e.target.parentElement.parentElement
+            id = producto.querySelector('a').getAttribute('itemid')
+            cantidad = producto.querySelector('input').value
+            let actualizarMontos = document.querySelectorAll('#subtotales')
+            productosLS = this.obtenerProductosLocalStorage()
+            productosLS.forEach(function (productoLS, index) {
+                if (productoLS.id === id) {
+                    productoLS.cantidad = cantidad
+                    actualizarMontos[index].innerHTML = Number(cantidad * productosLS[index].precio).toFixed(2)
+                }    
+            })
+            localStorage.setItem('productos', JSON.stringify(productosLS))
+        }
+    }
 }
 
