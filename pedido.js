@@ -23,9 +23,15 @@ function cargarEventos() {
     $('#procesarCompraBtn').click((e)=>{
         carro.procesarPedido(e)
     })
+
+    $('#btn1').click(()=>{
+        $('.table-responsive').slideUp('slow')
+    })
     
     $('.title-carrito').fadeIn(2500)
     
+    $('.title-tienda').slideToggle('slow')
+
     const URLGET = "https://jsonplaceholder.typicode.com/users"
     $('#btn1').click(()=>{
         $.get(URLGET,function(respuesta,estado){

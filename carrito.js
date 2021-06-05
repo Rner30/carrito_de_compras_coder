@@ -141,7 +141,7 @@ class carritoDeCompras{
                     <td>
                         <img src="${producto.imagen}" width = 100>
                     </td>
-                    <td>${producto.titulo}</td>
+                    <td>${producto.titulo.toUpperCase()}</td>
                     <td>${precioSinSigno}</td>
                     <td>
                         <input type="number" class="form-control cantidad bg-dark text-white" min="1" value="${producto.cantidad}">
