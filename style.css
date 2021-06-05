@@ -41,6 +41,11 @@ body{
 .shopping-cart{
   margin-left: 20%;
 }
+@media (max-width: 800px) {
+  .shopping-cart{
+    margin-left: 0;
+  }
+}
 /* ? SHOPPING CART */
 .shopping-cart-items {
   padding: 20px 0px;
