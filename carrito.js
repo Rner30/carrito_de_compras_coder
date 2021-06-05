@@ -5,6 +5,7 @@ class carritoDeCompras{
         if (e.target.classList.contains('agregar-carrito')) {
             const producto_capturado = e.target.parentElement.parentElement
             this.leerDatosProducto(producto_capturado)
+            
         }
     }
     //--LEER CARACTERISTICAS DEL PRODUCTO--
@@ -140,7 +141,7 @@ class carritoDeCompras{
                     <td>${producto.titulo}</td>
                     <td>${precioSinSigno}</td>
                     <td>
-                        <input type="number" class="form-control cantidad" min="1" value="${producto.cantidad}">
+                        <input type="number" class="form-control cantidad bg-dark text-white" min="1" value="${producto.cantidad}">
                     </td>
                     <td id="subtotales">${precioSinSigno * producto.cantidad} </td>
                     <td>

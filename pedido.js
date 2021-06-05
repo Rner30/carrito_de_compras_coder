@@ -8,10 +8,12 @@ function cargarEventos() {
     
     $('#productos').click((e)=>{
         carro.comprarProducto(e)
+        alertify.notify('Producto añadido', 'success', 5)
     })
      
     carrito.onclick = (e) => {
         carro.eliminarProducto(e)
+        alertify.error('Producto eliminado'); 
     }
     
     $('#vaciar-todo').click((e)=>{
@@ -24,5 +26,23 @@ function cargarEventos() {
         carro.procesarPedido(e)
     })
     
+    $('.title-carrito').fadeIn(2500)
+    
+    const URLGET = "https://jsonplaceholder.typicode.com/users"
+    $('#btn1').click(()=>{
+        $.get(URLGET,function(respuesta,estado){
+            if (estado === "success" ) {
+                let misDatos = respuesta
+                for (const dato of misDatos) {
+                    $("#llamadaAJAX").prepend(`
+                        <div class="ajax">
+                            <h6>${dato.username}</h6>
+                            <h6>${dato.email}</h6>
+                        </div>
+                    `)
+                }     
+            }
+        })
+    })
     
 }

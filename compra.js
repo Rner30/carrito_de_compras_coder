@@ -33,14 +33,16 @@ function procesarCompra(e) {
     e.preventDefault()
     
     if (compra.obtenerProductosLocalStorage().length === 0) {
-        alert("no hay ningun producto para realizar la compra")
+        alertify.alert('Carrito','No hay ningun producto para realizar la compra')
         window.location = 'index.html'   
     }if (correo.value !== "" && cliente.value !== ''){
-        alert("Compra completada!, Se envio su comprobante al Email")
-        localStorage.clear('productos')
-        window.location = 'index.html'
+        alertify.alert('COMPLETADO','Compra completada!, Se envio su comprobante al Email')
+        setTimeout(function () {
+            localStorage.clear('productos')
+            window.location = 'index.html' 
+        },2000)
     }else{
-        alert("COMPLETE TODOS LOS CAMPOS")
+        alertify.alert('Carrito','COMPLETE TODOS LOS CAMPOS')
     }
     
 }
