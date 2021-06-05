@@ -40,7 +40,7 @@ function procesarCompra(e) {
         setTimeout(function () {
             localStorage.clear('productos')
             window.location = 'index.html' 
-        },2000)
+        },3000)
     }else{
         alertify.alert('Carrito','COMPLETE TODOS LOS CAMPOS')
     }

@@ -18,7 +18,7 @@ class carritoDeCompras{
             id: producto.querySelector('a').getAttribute('itemid'),
             cantidad : 1
         }
-        alertify.notify(`${infoProducto.titulo} añadidos/as`, 'success', 5)
+        
         let productosLS
         productosLS = this.obtenerProductosLocalStorage()
         productosLS.forEach(productoLS => {
@@ -27,9 +27,10 @@ class carritoDeCompras{
             }
         })
         if (productosLS === infoProducto.id) {
-            alert("El producto ya fue agregado")
+            alertify.alert('Carrito','El producto ya fue agregado')
         }else{
             this.insertarCarrito(infoProducto)
+            alertify.notify(`${infoProducto.titulo} añadidos/as`, 'success', 4)
         }
         
     }
@@ -125,7 +126,7 @@ class carritoDeCompras{
     procesarPedido(e){
         e.preventDefault()
         if (this.obtenerProductosLocalStorage().length === 0) {
-            alert("No hay productos en el carrito")
+            alertify.alert('Carrito','No hay productos en el carrito');
         }else{
             location.href = "compra.html"
         }   

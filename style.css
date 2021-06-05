@@ -113,3 +113,13 @@ input{
   background-color: #820F78 !important;
   border-color: #820F78 !important;
 }
+.alertify-notifier .ajs-message.ajs-error{
+  color: black !important;
+  font-weight: 200;
+  border: none !important;
+}
+.alertify-notifier .ajs-message.ajs-success {
+  color: black !important;
+  font-weight: 200;
+  border: none !important;
+}
