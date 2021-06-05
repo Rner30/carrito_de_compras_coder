@@ -18,6 +18,7 @@ class carritoDeCompras{
             id: producto.querySelector('a').getAttribute('itemid'),
             cantidad : 1
         }
+        alertify.notify(`${infoProducto.titulo} añadidos/as`, 'success', 5)
         let productosLS
         productosLS = this.obtenerProductosLocalStorage()
         productosLS.forEach(productoLS => {
@@ -38,6 +39,7 @@ class carritoDeCompras{
         $('#carrito').append(`
             <tr>
                 <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
+                <td>${infoProducto.titulo}</td>
                 <td>${infoProducto.precio}</td>
                 <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td> 
             </tr>
@@ -54,7 +56,7 @@ class carritoDeCompras{
             e.target.parentElement.parentElement.remove()
             producto = e.target.parentElement.parentElement
             productoID = producto.querySelector("a").getAttribute("itemid")
-
+            alertify.error(`${producto.children[1].textContent} eliminado`); 
         }
         this.eliminarProductoLocalStorage(productoID)
         this.calcularTotal()     
@@ -108,6 +110,7 @@ class carritoDeCompras{
             $('#carrito').append(`
                 <tr>
                     <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
+                    <td>${infoProducto.titulo}</td>
                     <td>${infoProducto.precio}</td>
                     <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td> 
                 </tr>

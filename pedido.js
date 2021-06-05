@@ -8,12 +8,10 @@ function cargarEventos() {
     
     $('#productos').click((e)=>{
         carro.comprarProducto(e)
-        alertify.notify('Producto añadido', 'success', 5)
     })
      
     carrito.onclick = (e) => {
         carro.eliminarProducto(e)
-        alertify.error('Producto eliminado'); 
     }
     
     $('#vaciar-todo').click((e)=>{
