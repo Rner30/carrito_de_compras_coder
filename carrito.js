@@ -30,7 +30,7 @@ class carritoDeCompras{
             alertify.alert('Carrito','El producto ya fue agregado')
         }else{
             this.insertarCarrito(infoProducto)
-            alertify.notify(`${infoProducto.titulo} añadidos/as`, 'success', 4)
+            alertify.notify(`${infoProducto.titulo.toUpperCase()} añadidos/as`, 'success', 4)
         }
         
     }
@@ -40,13 +40,12 @@ class carritoDeCompras{
         $('#carrito').append(`
             <tr>
                 <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
-                <td>${infoProducto.titulo}</td>
+                <td>${infoProducto.titulo.toUpperCase()}</td>
                 <td>${infoProducto.precio}</td>
                 <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td> 
             </tr>
         `)
-        this.guardarProductosLocalStorage(infoProducto)
-        
+        this.guardarProductosLocalStorage(infoProducto) 
     }
     
     //--ELIMINAR PRODUCTO DEL CARRITO (INDEX)
@@ -111,7 +110,7 @@ class carritoDeCompras{
             $('#carrito').append(`
                 <tr>
                     <td><img src="${infoProducto.imagen}" style="width: 50px;"></td>
-                    <td>${infoProducto.titulo}</td>
+                    <td>${infoProducto.titulo.toUpperCase()}</td>
                     <td>${infoProducto.precio}</td>
                     <td><a href="#" class="borrar-producto btn btn-danger" itemid="${infoProducto.id}">X</a> </td> 
                 </tr>
