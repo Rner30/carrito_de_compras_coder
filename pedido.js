@@ -1,52 +1,44 @@
-const carro = new carritoDeCompras()
-const carrito = document.getElementById("carrito")
+const carro = new carritoDeCompras();
+const carrito = document.getElementById("carrito");
 
-
-cargarEventos()
+cargarEventos();
 
 function cargarEventos() {
-    
-    $('#productos').click((e)=>{
-        carro.comprarProducto(e)
-    })
-     
-    carrito.onclick = (e) => {
-        carro.eliminarProducto(e)
-    }
-    
-    $('#vaciar-todo').click((e)=>{
-        carro.vaciarCarrito(e)
-    })
-    
-    document.onload = carro.leerLocalStorage()
-    
-    $('#procesarCompraBtn').click((e)=>{
-        carro.procesarPedido(e)
-    })
+  $("#productos").click((e) => {
+    carro.comprarProducto(e);
+  });
 
-    $('#btn1').click(()=>{
-        $('.table-responsive').slideUp('slow')
-    })
-    
-    $('.title-carrito').fadeIn(2500)
-    
-    $('.title-tienda').slideToggle('slow')
+  carrito.onclick = (e) => {
+    carro.eliminarProducto(e);
+  };
 
-    const URLGET = "https://jsonplaceholder.typicode.com/users"
-    $('#btn1').click(()=>{
-        $.get(URLGET,function(respuesta,estado){
-            if (estado === "success" ) {
-                let misDatos = respuesta
-                for (const dato of misDatos) {
-                    $("#llamadaAJAX").prepend(`
-                        <div class="ajax">
-                            <h6>${dato.username}</h6>
-                            <h6>${dato.email}</h6>
-                        </div>
-                    `)
-                }     
-            }
-        })
-    })
-    
+  $("#vaciar-todo").click((e) => {
+    carro.vaciarCarrito(e);
+  });
+
+  document.onload = carro.leerLocalStorage();
+
+  $("#procesarCompraBtn").click((e) => {
+    carro.procesarPedido(e);
+  });
+
+  $(".title-carrito").fadeIn(2500);
+
+  $(".title-tienda").slideToggle("slow");
 }
+const URLGET = "https://jsonplaceholder.typicode.com/users";
+$("#btn1").click(() => {
+  $.get(URLGET, function (respuesta, estado) {
+    if (estado === "success") {
+      let misDatos = respuesta;
+      for (const dato of misDatos) {
+        $("#llamadaAJAX").prepend(`
+          <div class="ajax">
+              <h6>${dato.username}</h6>
+              <h6>${dato.email}</h6>
+          </div>
+        `);
+      }
+    }
+  });
+});

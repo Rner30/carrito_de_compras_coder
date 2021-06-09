@@ -128,3 +128,7 @@ input{
   font-weight: 200;
   border: none !important;
 }
+.font-comic{
+  font-family: 'Gloria Hallelujah', cursive;
+  font-weight: 200;
+}
