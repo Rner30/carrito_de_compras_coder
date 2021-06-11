@@ -1,4 +1,3 @@
-
 const carro = new carritoDeCompras();
 const carrito = document.getElementById("carrito");
 
@@ -27,19 +26,3 @@ function cargarEventos() {
 
   $(".title-tienda").slideToggle("slow");
 }
-const URLGET = "https://jsonplaceholder.typicode.com/users";
-$("#btn1").click(() => {
-  $.get(URLGET, function (respuesta, estado) {
-    if (estado === "success") {
-      let misDatos = respuesta;
-      for (const dato of misDatos) {
-        $("#llamadaAJAX").prepend(`
-          <div class="ajax">
-              <h6>${dato.username}</h6>
-              <h6>${dato.email}</h6>
-          </div>
-        `);
-      }
-    }
-  });
-});
