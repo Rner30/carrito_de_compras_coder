@@ -36,14 +36,16 @@ function procesarCompra(e) {
     window.location = "index.html";
   }
   if (correo.value !== "" && cliente.value !== "") {
-    alertify.alert(
+    let = alertaCompra = alertify.alert(
       "COMPLETADO",
-      "Compra completada!, Se envio su comprobante al Email"
+      "Compra completada!, Se envio su comprobante al Email",
+      (e) => {
+        if (e) {
+          localStorage.clear("productos");
+          window.location = "index.html";
+        }
+      }
     );
-    setTimeout(function () {
-      localStorage.clear("productos");
-      window.location = "index.html";
-    }, 3000);
   } else {
     alertify.alert("Carrito", "COMPLETE TODOS LOS CAMPOS");
   }
